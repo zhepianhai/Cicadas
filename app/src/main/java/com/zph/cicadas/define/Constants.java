@@ -20,8 +20,8 @@ public class Constants {
     public static final String[] HOMETABLNAMES={"XX","XX","XX","XX","XX","XX","XX"};
     public static final int[] HOMETABLTYPES={HOME_1,HOME_2,HOME_3,HOME_4,HOME_5,HOME_6,HOME_7};
 
-    public static final int INFO=2000;
-    public static final int MORE=3000;
+    public static final int INFO=0x100;
+    public static final int MORE=0x200;
 
     public static final String CATGORY_TITLE="category_title";
     public static final String CATGORY_TYPE="category_type";
