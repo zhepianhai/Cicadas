@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cicadas</string>
+
+    <string name="title_home">主页</string>
+    <string name="title_information">资讯</string>
+    <string name="title_more">更多</string>
+</resources>
