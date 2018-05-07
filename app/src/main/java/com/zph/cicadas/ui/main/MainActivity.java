@@ -220,14 +220,16 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         fabSearch.hide();
     }
 
-    private void doOnFloatingActionButtonClick(@IntRange(from = 0, to = 2) int position) {
+    private void doOnFloatingActionButtonClick(@IntRange(from = 0, to = 3) int position) {
         switch (position) {
-            case 0:
+            case TAB_HOME:
                 showHomeBottomSheet();
                 break;
-            case 1:
+            case TAB_INFO:
                 break;
-            case 2:
+            case TAB_MORE:
+                break;
+            case TAB_ME:
                 break;
             default:
         }
