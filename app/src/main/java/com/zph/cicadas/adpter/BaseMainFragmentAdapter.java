@@ -1,17 +1,21 @@
 package com.zph.cicadas.adpter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import com.zph.cicadas.define.Constants;
+import com.zph.cicadas.frag.me.FragMe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 /**
  * @author zph
@@ -25,14 +29,15 @@ public class BaseMainFragmentAdapter extends FragmentPagerAdapter {
     private int categoryType;
     private FragmentTransaction mCurTransaction;
     private FragmentManager mFragmentManager;
-
+    private Context mContext;
     private boolean isDestroy = false;
 
-    public BaseMainFragmentAdapter(FragmentManager fm, ArrayList<HashMap<String,String>> categoryList, int categoryType) {
+    public BaseMainFragmentAdapter(Context mContext,FragmentManager fm, ArrayList<HashMap<String,String>> categoryList, int categoryType) {
         super(fm);
         mFragmentManager = fm;
         this.categoryList = categoryList;
         this.categoryType = categoryType;
+        this.mContext=mContext;
     }
 
     public boolean isDestroy() {
@@ -70,17 +75,16 @@ public class BaseMainFragmentAdapter extends FragmentPagerAdapter {
         int types=Integer.valueOf(category.get(Constants.CATGORY_TYPE));
         if(type==Constants.HOME) {
             switch (types) {
-                case Constants.HOME_PICTURE:
-                    if (Constants.HOME_PICTURE == Integer.valueOf(category.get(Constants.CATGORY_TYPE))) {
-//                        FragPicture picFragment = FragPicture.getInstance();
-                        return new Fragment();
-                    } else if (Constants.HOME_VIDEO == Integer.valueOf(category.get(Constants.CATGORY_TYPE))) {
-//                        FragVideo picFragment = FragVideo.getInstance();
-                        return new Fragment();
-                    } else {
-//                        FragAudio picFragment = FragAudio.getInstance();
-                        return new Fragment();
-                    }
+                case Constants.HOME_1:
+                case Constants.HOME_2:
+                case Constants.HOME_3:
+                case Constants.HOME_4:
+                case Constants.HOME_5:
+                case Constants.HOME_6:
+                case Constants.HOME_7:
+
+
+                    return  new FragMe();
             }
         }
         else if(type==Constants.INFO){

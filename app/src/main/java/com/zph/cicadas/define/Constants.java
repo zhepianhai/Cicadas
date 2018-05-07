@@ -9,12 +9,16 @@ package com.zph.cicadas.define;
 public class Constants {
     public static final String DB_NAME = "zph_cicadas";
 
-    public static final int HOME=1000;
-    public static final int HOME_PICTURE=1001;
-    public static final int HOME_VIDEO=1002;
-    public static final int HOME_AUDIO=1003;
-    public static final String[] HOMETABLNAMES={"XX","XX","XX"};
-    public static final int[] HOMETABLTYPES={HOME_PICTURE,HOME_VIDEO,HOME_AUDIO};
+    public static final int HOME=0x000;
+    public static final int HOME_1=0x001;
+    public static final int HOME_2=0x002;
+    public static final int HOME_3=0x003;
+    public static final int HOME_4=0x004;
+    public static final int HOME_5=0x005;
+    public static final int HOME_6=0x006;
+    public static final int HOME_7=0x007;
+    public static final String[] HOMETABLNAMES={"XX","XX","XX","XX","XX","XX","XX"};
+    public static final int[] HOMETABLTYPES={HOME_1,HOME_2,HOME_3,HOME_4,HOME_5,HOME_6,HOME_7};
 
     public static final int INFO=2000;
     public static final int MORE=3000;

@@ -56,7 +56,7 @@ public abstract class BaseMainFragment extends MvpFragment<BaseMainView, BaseMai
         super.onAttach(context);
         mFragmentManager = getChildFragmentManager();
         list=new ArrayList<>();
-        mBaseMainFragmentAdapter = new BaseMainFragmentAdapter(mFragmentManager, list, setFragMentType());
+        mBaseMainFragmentAdapter = new BaseMainFragmentAdapter(getActivity(),mFragmentManager, list, setFragMentType());
     }
 
     public BaseMainFragment() {
