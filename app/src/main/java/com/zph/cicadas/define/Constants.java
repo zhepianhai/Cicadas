@@ -9,6 +9,8 @@ package com.zph.cicadas.define;
 public class Constants {
     public static final String DB_NAME = "zph_cicadas";
 
+    public static final int DEFIND=-1;
+
     public static final int HOME=0x000;
     public static final int HOME_1=0x001;
     public static final int HOME_2=0x002;
