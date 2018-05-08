@@ -9,7 +9,9 @@ import com.zph.cicadas.inject.model.ApplicationModule;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
 /**
- * Created by 3119 on 2018/5/7.
+ *
+ * @author zph
+ * @date 2018/5/7
  */
 
 public class MyApplication extends Application {

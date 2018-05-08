@@ -30,7 +30,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by 3119 on 2018/5/8.
+ *
+ * @author zph
+ * @date 2018/5/8
  */
 
 public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> {
