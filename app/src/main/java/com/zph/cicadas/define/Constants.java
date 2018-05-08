@@ -19,7 +19,7 @@ public class Constants {
     public static final int HOME_5=0x005;
     public static final int HOME_6=0x006;
     public static final int HOME_7=0x007;
-    public static final String[] HOMETABLNAMES={"XX","XX","XX","XX","XX","XX","XX"};
+    public static final String[] HOMETABLNAMES={"直播","电影","漫画","音乐","头条","周边","游戏"};
     public static final int[] HOMETABLTYPES={HOME_1,HOME_2,HOME_3,HOME_4,HOME_5,HOME_6,HOME_7};
 
     public static final int INFO=0x100;

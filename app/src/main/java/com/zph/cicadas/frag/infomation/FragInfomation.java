@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zph.cicadas.R;
+import com.zph.cicadas.define.Constants;
+import com.zph.cicadas.frag.base.BaseMainFragment;
 import com.zph.cicadas.ui.BaseFragment;
 
 
@@ -17,7 +19,7 @@ import com.zph.cicadas.ui.BaseFragment;
  * @author zph
  * @date 2018/3/22
  */
-public class FragInfomation extends BaseFragment {
+public class FragInfomation extends BaseMainFragment {
     public static FragInfomation getInstance() {
         return new FragInfomation();
     }
@@ -27,17 +29,24 @@ public class FragInfomation extends BaseFragment {
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
     }
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_infomation, container, false);
-    }
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        super.onCreateView(inflater, container, savedInstanceState);
+//
+////        return inflater.inflate(R.layout.fragment_infomation, container, false);
+//    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    @Override
+    public int setFragMentType() {
+        return Constants.HOME;
+    }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -2,7 +2,7 @@
     <string name="app_name">Cicadas</string>
 
     <string name="title_home">主页</string>
-    <string name="title_information">资讯</string>
+    <string name="title_information">推荐</string>
     <string name="title_find">发现</string>
     <string name="title_me">我的</string>
 </resources>
