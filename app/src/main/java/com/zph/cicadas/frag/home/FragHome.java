@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -21,6 +22,7 @@ import com.alibaba.android.vlayout.layout.DefaultLayoutHelper;
 import com.alibaba.android.vlayout.layout.FixLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.ScrollFixLayoutHelper;
+import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.zph.cicadas.R;
 import com.zph.cicadas.adpter.AdpVirtualLayout;
 import com.zph.cicadas.define.Constants;
@@ -99,6 +101,9 @@ public class FragHome extends BaseMainFragment {
         });
         mAdpVirtualLayout=new AdpVirtualLayout(mManager,getActivity(),mArrayListData);
         mRecyclerView.setAdapter(mAdpVirtualLayout);
+
+
+
     }
     @Override
     public void onResume() {

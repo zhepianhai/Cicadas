@@ -18,9 +18,13 @@ import com.alibaba.android.vlayout.layout.FixLayoutHelper;
 import com.alibaba.android.vlayout.layout.FloatLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.alibaba.android.vlayout.layout.ScrollFixLayoutHelper;
+import com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper;
+import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.zph.cicadas.R;
 import com.zph.cicadas.frag.home.FragHome;
+import com.zph.cicadas.utils.SizeUtil;
 
 import org.w3c.dom.Text;
 
@@ -30,7 +34,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
  * @author zph
  * @date 2018/5/8
  */
@@ -54,30 +57,43 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
     private void initLayoutHelped() {
         List<LayoutHelper> helpers = new LinkedList<>();
 
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
-        gridLayoutHelper.setItemCount(9);
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
+        gridLayoutHelper.setItemCount(10);
+        gridLayoutHelper.setSpanCount(5);
+        gridLayoutHelper.setMarginBottom(20);
 
-        FloatLayoutHelper floatLayoutHelper =
-                new FloatLayoutHelper(
-                );
-        floatLayoutHelper.setItemCount(1);
+        GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(3);
+        gridLayoutHelper1.setItemCount(6);
+        gridLayoutHelper1.setSpanCount(3);
+        gridLayoutHelper.setMarginBottom(20);
+
 
         ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
-        columnLayoutHelper.setItemCount(5);
-        columnLayoutHelper.setWeights(new float[]{30, 10, 30, 20, 10});
-        columnLayoutHelper.setMarginBottom(100);
+        columnLayoutHelper.setItemCount(2);
+        columnLayoutHelper.setWeights(new float[]{2, 1});
+
+        ColumnLayoutHelper columnLayoutHelper1 = new ColumnLayoutHelper();
+        columnLayoutHelper1.setItemCount(3);
+        columnLayoutHelper1.setWeights(new float[]{2, 1, 1});
 
         //设置线性布局
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setItemCount(2);
         linearLayoutHelper.setDividerHeight(10);
 
-        helpers.add(linearLayoutHelper);
-        helpers.add(floatLayoutHelper);
-        helpers.add(columnLayoutHelper);
-        helpers.add(gridLayoutHelper);
-        helpers.add(DefaultLayoutHelper.newHelper(2));
+        OnePlusNLayoutHelper onePlusNLayoutHelper = new OnePlusNLayoutHelper(3);
+        onePlusNLayoutHelper.setAspectRatio(3);// 设置设置布局内每行布局的宽与高的比
+
+        helpers.add(gridLayoutHelper);//0-9
+        helpers.add(DefaultLayoutHelper.newHelper(1));//10
+        helpers.add(gridLayoutHelper1);//11-16
+        helpers.add(DefaultLayoutHelper.newHelper(1));//17
+        helpers.add(columnLayoutHelper);//18 19
+        helpers.add(columnLayoutHelper1);// 20 21 22
+        helpers.add(linearLayoutHelper);// 23 24
+        helpers.add(onePlusNLayoutHelper);// 25 26  27
         this.mManager.setLayoutHelpers(helpers);
+
     }
 
     @NonNull
@@ -89,13 +105,32 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 420);
-        if (position == 2) {
-            layoutParams.width = 180;
-            layoutParams.height = 180;
-            layoutParams.setMargins(10,10,10,10);
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        if (position <= 9) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 60);
+            layoutParams.setMargins(0, 10, 0, 10);
         }
+        if (position == 10) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 60);
+        }
+        if (position == 17) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 60);
+        }
+        if (position > 10 && position < 17) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 120);
+            layoutParams.setMargins(0, 10, 0, 10);
+        }
+        if (position == 17) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 60);
+        }
+        if (position > 17) {
+            layoutParams.height = SizeUtil.dp2px(mContext, 120);
+        }
+
+
         holder.itemView.setLayoutParams(layoutParams);
+
         holder.mTv.setText(Integer.toString(position));
         if (position == 2) {
             holder.itemView.setBackgroundColor(Color.parseColor("#DB7093"));
@@ -118,6 +153,7 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
 
     class VH extends RecyclerView.ViewHolder {
         TextView mTv;
+
         VH(View itemView) {
             super(itemView);
             mTv = itemView.findViewById(R.id.item_fraghome_vlayout_tv);
