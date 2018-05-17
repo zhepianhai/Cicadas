@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -24,6 +25,7 @@ import com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.zph.cicadas.R;
 import com.zph.cicadas.frag.home.FragHome;
+import com.zph.cicadas.frag.home.OnItemClickListener;
 import com.zph.cicadas.utils.SizeUtil;
 
 import org.w3c.dom.Text;
@@ -44,7 +46,11 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
     private Context mContext;
     private ArrayList<HashMap<String, String>> mArrayListData;
     private LayoutInflater mInflater;
+    private OnItemClickListener mOnItemClickListener;//声明接口
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
     public AdpVirtualLayout(@NonNull VirtualLayoutManager layoutManager, Context mContext, ArrayList<HashMap<String, String>> mArrayListData) {
         super(layoutManager);
         this.mManager = layoutManager;
@@ -70,11 +76,12 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
 
         ColumnLayoutHelper columnLayoutHelper = new ColumnLayoutHelper();
         columnLayoutHelper.setItemCount(2);
-        columnLayoutHelper.setWeights(new float[]{2, 1});
+        columnLayoutHelper.setWeights(new float[]{66.6f,33.3f});
 
         ColumnLayoutHelper columnLayoutHelper1 = new ColumnLayoutHelper();
         columnLayoutHelper1.setItemCount(3);
-        columnLayoutHelper1.setWeights(new float[]{2, 1, 1});
+
+        columnLayoutHelper1.setWeights(new float[]{50f,25f,25f});
 
         //设置线性布局
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
@@ -99,11 +106,11 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(mInflater.inflate(R.layout.item_fraghome_vlayout, parent, false));
+        return new VH(mInflater.inflate(R.layout.item_fraghome_vlayout, parent, false),viewType);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
+    public void onBindViewHolder(@NonNull final VH holder, int position) {
         VirtualLayoutManager.LayoutParams layoutParams = new VirtualLayoutManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -127,15 +134,34 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
         if (position > 17) {
             layoutParams.height = SizeUtil.dp2px(mContext, 120);
         }
-
+        if(position==18 ||position==19){
+            layoutParams.height = SizeUtil.dp2px(mContext, 120);
+            layoutParams.width= ViewGroup.LayoutParams.MATCH_PARENT;
+        }
 
         holder.itemView.setLayoutParams(layoutParams);
 
         holder.mTv.setText(Integer.toString(position));
-        if (position == 2) {
+        if(position==18 ||position==19){
             holder.itemView.setBackgroundColor(Color.parseColor("#DB7093"));
         } else
             holder.itemView.setBackgroundColor(Color.parseColor("#A9A9A9"));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getLayoutPosition();
+                mOnItemClickListener.onItemClick(holder.itemView, position);
+            }
+        });
+
+        holder.mImg.setImageResource(R.mipmap.ic_launcher_round);
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override
@@ -153,10 +179,11 @@ public class AdpVirtualLayout extends VirtualLayoutAdapter<AdpVirtualLayout.VH> 
 
     class VH extends RecyclerView.ViewHolder {
         TextView mTv;
-
-        VH(View itemView) {
+        ImageView mImg;
+        VH(View itemView,int viewType) {
             super(itemView);
             mTv = itemView.findViewById(R.id.item_fraghome_vlayout_tv);
+            mImg=itemView.findViewById(R.id.item_fraghome_vlayout_img);
         }
     }
 }

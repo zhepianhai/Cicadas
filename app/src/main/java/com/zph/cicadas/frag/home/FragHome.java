@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -40,7 +41,7 @@ import static com.zph.cicadas.define.Constants.DEFIND;
  * @author zph
  * @date 2018/3/22
  */
-public class FragHome extends BaseMainFragment {
+public class FragHome extends BaseMainFragment implements OnItemClickListener {
     private View mView;
 
     private RecyclerView mRecyclerView;
@@ -101,8 +102,7 @@ public class FragHome extends BaseMainFragment {
         });
         mAdpVirtualLayout=new AdpVirtualLayout(mManager,getActivity(),mArrayListData);
         mRecyclerView.setAdapter(mAdpVirtualLayout);
-
-
+        mAdpVirtualLayout.setOnItemClickListener(this);
 
     }
     @Override
@@ -116,5 +116,10 @@ public class FragHome extends BaseMainFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(),"position:"+position,Toast.LENGTH_SHORT).show();
     }
 }
